@@ -1,5 +1,6 @@
 import 'package:ai_loan_buddy/providers/chat_provider.dart';
 import 'package:ai_loan_buddy/providers/settings_provider.dart';
+import 'package:ai_loan_buddy/theme/app_theme.dart';
 import 'package:ai_loan_buddy/widgets/app_button.dart';
 import 'package:ai_loan_buddy/widgets/language_selector_dropdown.dart';
 import 'package:flutter/material.dart';
@@ -35,21 +36,6 @@ class SettingsScreen extends ConsumerWidget {
               ),
               const SizedBox(height: 24),
               Text(
-                'Voice Speed',
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
-              Slider(
-                min: 0.5,
-                max: 2.0,
-                divisions: 15,
-                value: settings.voiceSpeed,
-                label: '${settings.voiceSpeed.toStringAsFixed(1)}x',
-                onChanged: (val) {
-                  settingsNotifier.setVoiceSpeed(val);
-                },
-              ),
-              const SizedBox(height: 24),
-              Text(
                 'Theme',
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
@@ -58,6 +44,8 @@ class SettingsScreen extends ConsumerWidget {
                 value: settings.themeMode == ThemeMode.dark,
                 onChanged: (_) {
                   settingsNotifier.toggleTheme();
+                  ref.read(appThemeProvider.notifier).state =
+                      settings.themeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
                 },
               ),
               const SizedBox(height: 24),

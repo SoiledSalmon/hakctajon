@@ -62,13 +62,15 @@ class _HomeScreenState extends State<HomeScreen> {
     return GlassCard(
       onTap: onTap,
       width: double.infinity,
-      height: 140,
+      height: 150,
       padding: const EdgeInsets.all(20),
-      child: Row(
+      splashColor: iconColor.withOpacity(0.2),
+      childBuilder: (context, isPressed) => Row(
         children: [
-          Container(
-            width: 80,
-            height: 80,
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            width: 90,
+            height: 90,
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
@@ -78,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   iconColor.withOpacity(0.7),
                 ],
               ),
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(isPressed ? 18 : 20),
               boxShadow: [
                 BoxShadow(
                   color: iconColor.withOpacity(0.4),
@@ -89,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             child: Icon(
               icon,
-              size: 40,
+              size: 45,
               color: Colors.white,
             ),
           ),
@@ -100,6 +102,8 @@ class _HomeScreenState extends State<HomeScreen> {
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
+                    letterSpacing: 0.5,
+                    fontSize: (Theme.of(context).textTheme.headlineSmall?.fontSize ?? 24) + 2,
                     shadows: [
                       Shadow(
                         color: Colors.black.withOpacity(0.3),
@@ -150,9 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(width: 12),
                   ProfileBubbleButton(
                     onTap: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Profile tapped (dummy)')),
-                      );
+                      Navigator.of(context).pushNamed(RouteNames.profile);
                     },
                   ),
                 ],
@@ -177,7 +179,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 24),
 
               // Bottom Section - Floating Mic Button with ripple animation
               Align(

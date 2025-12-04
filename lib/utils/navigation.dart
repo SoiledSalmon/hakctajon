@@ -9,6 +9,7 @@ class RouteNames {
   static const checklist = '/checklist';
   static const pdfPreview = '/pdf_preview';
   static const settings = '/settings';
+  static const profile = '/profile';
 }
 
 class NavigationUtils {
