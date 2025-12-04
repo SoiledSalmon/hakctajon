@@ -13,6 +13,7 @@ dependencies:
   lottie: ^1.4.3
   flutter_svg: ^1.1.6
   cupertino_icons: ^1.0.5
+  uuid: ^4.2.2
 
 dev_dependencies:
   flutter_test:
@@ -21,5 +22,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  assets:
+  assets: []
     # No local assets, all Lottie animations and images loaded via network placeholders

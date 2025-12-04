@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ai_loan_buddy/utils/dummy_methods.dart' as dummy;
 
 enum LoanType { personal, home, auto, education }
 
@@ -133,7 +134,7 @@ class EligibilityNotifier extends StateNotifier<EligibilityState> {
       'aadhaarChecked': state.formData.aadhaarChecked,
       'payslipsChecked': state.formData.payslipsChecked,
     };
-    final resultMap = await runEligibilityCheck(dataMap);
+    final resultMap = await dummy.runEligibilityCheck(dataMap);
     final missingDocs = <String>[];
     if (!(state.formData.panChecked)) missingDocs.add('PAN Card');
     if (!(state.formData.aadhaarChecked)) missingDocs.add('Aadhaar Card');

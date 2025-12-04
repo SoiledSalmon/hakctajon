@@ -1,5 +1,6 @@
 import 'package:ai_loan_buddy/providers/document_provider.dart';
 import 'package:ai_loan_buddy/theme/app_theme.dart';
+import 'package:ai_loan_buddy/widgets/glass_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
