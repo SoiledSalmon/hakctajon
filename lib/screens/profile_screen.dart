@@ -1,13 +1,19 @@
+import 'package:ai_loan_buddy/providers/settings_provider.dart';
 import 'package:ai_loan_buddy/theme/app_theme.dart';
-import 'package:ai_loan_buddy/utils/navigation.dart';
-import 'package:ai_loan_buddy/widgets/glass_card.dart';
-import 'package:flutter/material.dart';
 
-class ProfileScreen extends StatelessWidget {
+import 'package:ai_loan_buddy/widgets/glass_card.dart';
+import 'package:ai_loan_buddy/widgets/language_selector_dropdown.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final settings = ref.watch(settingsProvider);
+    final settingsNotifier = ref.read(settingsProvider.notifier);
+
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       extendBodyBehindAppBar: true,
@@ -25,14 +31,7 @@ class ProfileScreen extends StatelessWidget {
                 fontWeight: FontWeight.w700,
               ),
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.settings_outlined, color: Colors.white),
-            onPressed: () {
-               Navigator.of(context).pushNamed(RouteNames.settings);
-            },
-          ),
-        ],
+
       ),
       body: Container(
         decoration: const BoxDecoration(
@@ -142,40 +141,39 @@ class ProfileScreen extends StatelessWidget {
                         ],
                       ),
                       const Divider(height: 32, color: Colors.white24),
-                      _buildProfileRow(context, Icons.email_outlined, 'Email', 'john.doe@example.com'),
+                      _buildProfileRow(
+                          context, Icons.email_outlined, 'Email', 'john.doe@example.com'),
                       const SizedBox(height: 20),
-                      _buildProfileRow(context, Icons.phone_outlined, 'Phone', '+1 (555) 123-4567'),
-                      const SizedBox(height: 20),
-                      _buildProfileRow(context, Icons.calendar_today_outlined, 'Member Since', 'Dec 2023'),
+                      _buildProfileRow(
+                          context, Icons.phone_outlined, 'Phone', '+1 (555) 123-4567'),
                     ],
                   ),
                 ),
 
                 const SizedBox(height: 24),
 
-                // Account Stats Section
+                // Settings Controls Section (Language & Theme)
                 Row(
                   children: [
                     Expanded(
                       child: GlassCard(
-                        padding: const EdgeInsets.all(16),
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              '12',
-                              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                                    color: AppTheme.accent1,
-                                    fontWeight: FontWeight.w700,
+                              'Language',
+                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: Colors.white70,
+                                    fontWeight: FontWeight.w600,
                                   ),
                             ),
-                            const SizedBox(height: 4),
-                            Text(
-                              'Loans Checked',
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                    fontSize: 12,
-                                    color: Colors.white70,
-                                  ),
+                            const SizedBox(height: 8),
+                            LanguageSelectorDropdown(
+                              currentLanguage: settings.languageCode,
+                              onChanged: (val) {
+                                settingsNotifier.setLanguage(val);
+                              },
                             ),
                           ],
                         ),
@@ -184,24 +182,31 @@ class ProfileScreen extends StatelessWidget {
                     const SizedBox(width: 16),
                     Expanded(
                       child: GlassCard(
-                        padding: const EdgeInsets.all(16),
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              '5',
-                              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                                    color: AppTheme.warning,
-                                    fontWeight: FontWeight.w700,
+                              settings.themeMode == ThemeMode.light ? 'Light Mode' : 'Dark Mode',
+                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: Colors.white70,
+                                    fontWeight: FontWeight.w600,
                                   ),
                             ),
-                            const SizedBox(height: 4),
-                            Text(
-                              'Docs Uploaded',
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                    fontSize: 12,
-                                    color: Colors.white70,
-                                  ),
+                            const SizedBox(height: 8),
+                            Switch(
+                              value: settings.themeMode == ThemeMode.dark,
+                              activeColor: AppTheme.accent1,
+                              activeTrackColor: Colors.white24,
+                              inactiveThumbColor: Colors.white,
+                              inactiveTrackColor: Colors.white12,
+                              onChanged: (_) {
+                                settingsNotifier.toggleTheme();
+                                ref.read(appThemeProvider.notifier).state =
+                                    settings.themeMode == ThemeMode.light
+                                        ? ThemeMode.dark
+                                        : ThemeMode.light;
+                              },
                             ),
                           ],
                         ),
