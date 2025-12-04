@@ -4,6 +4,7 @@ import 'package:ai_loan_buddy/screens/education_screen.dart';
 import 'package:ai_loan_buddy/screens/eligibility_screen.dart';
 import 'package:ai_loan_buddy/screens/home_screen.dart';
 import 'package:ai_loan_buddy/screens/pdf_preview_screen.dart';
+import 'package:ai_loan_buddy/screens/profile_screen.dart';
 import 'package:ai_loan_buddy/screens/settings_screen.dart';
 import 'package:ai_loan_buddy/screens/splash_screen.dart';
 import 'package:ai_loan_buddy/theme/app_theme.dart';
@@ -52,6 +53,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const PDFPreviewScreen());
       case RouteNames.settings:
         return MaterialPageRoute(builder: (_) => const SettingsScreen());
+      case RouteNames.profile:
+        return MaterialPageRoute(builder: (_) => const ProfileScreen());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

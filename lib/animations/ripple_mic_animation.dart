@@ -43,8 +43,8 @@ class _RippleMicAnimationState extends State<RippleMicAnimation>
     return GestureDetector(
       onTap: widget.onTap,
       child: SizedBox(
-        width: 80,
-        height: 80,
+        width: 100,
+        height: 100,
         child: Stack(
           alignment: Alignment.center,
           children: [
@@ -52,8 +52,8 @@ class _RippleMicAnimationState extends State<RippleMicAnimation>
               animation: _controller,
               builder: (_, __) {
                 return Container(
-                  width: _radiusAnimation.value,
-                  height: _radiusAnimation.value,
+                  width: _radiusAnimation.value * 2,
+                  height: _radiusAnimation.value * 2,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: AppTheme.primary1.withOpacity(_opacityAnimation.value),
@@ -61,7 +61,7 @@ class _RippleMicAnimationState extends State<RippleMicAnimation>
                 );
               },
             ),
-            GlassMicButton(),
+            const GlassMicButton(),
           ],
         ),
       ),
@@ -75,11 +75,11 @@ class GlassMicButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 56,
-      height: 56,
+      width: 72,
+      height: 72,
       decoration: BoxDecoration(
         gradient: AppTheme.primaryGradient,
-        borderRadius: BorderRadius.circular(28),
+        borderRadius: BorderRadius.circular(36),
         boxShadow: [
           BoxShadow(
             color: AppTheme.primary1.withOpacity(0.6),
@@ -91,7 +91,7 @@ class GlassMicButton extends StatelessWidget {
       child: const Icon(
         Icons.mic,
         color: Colors.white,
-        size: 28,
+        size: 36,
       ),
     );
   }
