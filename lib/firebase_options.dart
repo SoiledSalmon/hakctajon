@@ -64,6 +64,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '304711399498',
     projectId: 'ai-for-loans',
     storageBucket: 'ai-for-loans.firebasestorage.app',
+    iosClientId: '304711399498-ojbn72mdihqrb330qoeesnm3hi8u71h9.apps.googleusercontent.com',
     iosBundleId: 'com.ronith.loanai',
   );
 
@@ -73,6 +74,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '304711399498',
     projectId: 'ai-for-loans',
     storageBucket: 'ai-for-loans.firebasestorage.app',
+    iosClientId: '304711399498-ojbn72mdihqrb330qoeesnm3hi8u71h9.apps.googleusercontent.com',
     iosBundleId: 'com.ronith.loanai',
   );
 
@@ -85,4 +87,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'ai-for-loans.firebasestorage.app',
     measurementId: 'G-RG52NYX1EM',
   );
+
 }
