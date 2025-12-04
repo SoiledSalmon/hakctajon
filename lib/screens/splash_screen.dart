@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
     Timer(const Duration(seconds: 2), () {
       if (mounted) {
-        Navigator.of(context).pushReplacementNamed(RouteNames.home);
+        Navigator.of(context).pushReplacementNamed(RouteNames.signup);
       }
     });
   }

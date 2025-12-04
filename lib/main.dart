@@ -3,9 +3,11 @@ import 'package:ai_loan_buddy/screens/checklist_screen.dart';
 import 'package:ai_loan_buddy/screens/education_screen.dart';
 import 'package:ai_loan_buddy/screens/eligibility_screen.dart';
 import 'package:ai_loan_buddy/screens/home_screen.dart';
+import 'package:ai_loan_buddy/screens/login_screen.dart';
 import 'package:ai_loan_buddy/screens/pdf_preview_screen.dart';
 import 'package:ai_loan_buddy/screens/profile_screen.dart';
 import 'package:ai_loan_buddy/screens/settings_screen.dart';
+import 'package:ai_loan_buddy/screens/signup_screen.dart';
 import 'package:ai_loan_buddy/screens/splash_screen.dart';
 import 'package:ai_loan_buddy/theme/app_theme.dart';
 import 'package:ai_loan_buddy/utils/navigation.dart';
@@ -17,7 +19,7 @@ import 'firebase_options.dart';
 void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-);
+  );
   runApp(const ProviderScope(child: AILoanBuddyApp()));
 }
 
@@ -44,6 +46,10 @@ class RouteGenerator {
     switch (settings.name) {
       case RouteNames.splash:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
+      case RouteNames.signup:
+        return MaterialPageRoute(builder: (_) => const SignupScreen());
+      case RouteNames.login:
+        return MaterialPageRoute(builder: (_) => const LoginScreen());
       case RouteNames.home:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
       case RouteNames.chat:

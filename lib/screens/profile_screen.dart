@@ -1,5 +1,6 @@
 import 'package:ai_loan_buddy/providers/settings_provider.dart';
 import 'package:ai_loan_buddy/theme/app_theme.dart';
+import 'package:ai_loan_buddy/utils/navigation.dart';
 
 import 'package:ai_loan_buddy/widgets/glass_card.dart';
 import 'package:ai_loan_buddy/widgets/language_selector_dropdown.dart';
@@ -221,7 +222,9 @@ class ProfileScreen extends ConsumerWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {}, // Dummy action
+                    onPressed: () {
+                      Navigator.of(context).pushNamedAndRemoveUntil(RouteNames.signup, (route) => false);
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white.withOpacity(0.1),
                       side: BorderSide(color: AppTheme.warning.withOpacity(0.5)),

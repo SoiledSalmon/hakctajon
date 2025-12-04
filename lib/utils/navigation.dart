@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 class RouteNames {
   static const splash = '/splash';
+  static const signup = '/signup';
+  static const login = '/login';
   static const home = '/home';
   static const chat = '/chat';
   static const eligibility = '/eligibility';
