@@ -107,6 +107,7 @@ class _AIChatScreenState extends ConsumerState<AIChatScreen> {
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     _QuickActionChip(
                       label: 'Check eligibility',
@@ -137,7 +138,6 @@ class _AIChatScreenState extends ConsumerState<AIChatScreen> {
                       },
                     ),
                   ],
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 ),
               ),
             ),

@@ -5,7 +5,7 @@
 
 ## Tech Stack
 - **Framework:** Flutter (Dart)
-- **State Management:** Riverpod (`flutter_riverpod`)
+- **State Management:** Riverpod (`flutter_riverpod` **^2.6.1** - *DO NOT UPGRADE TO v3*)
 - **Typography:** Google Fonts (`Poppins` for headings, `Inter` for body)
 - **Animations:** Lottie, Flutter SVG
 - **Icons:** Cupertino Icons
@@ -22,7 +22,7 @@
 - **`utils/`**: Helper functions and constants (e.g., `navigation.dart`).
 
 ### Key Patterns & Conventions
-- **State Management:** Uses `StateNotifierProvider` and `ConsumerWidget` from Riverpod.
+- **State Management:** Uses `StateNotifierProvider` and `ConsumerWidget` from Riverpod v2. **Strictly adhere to v2 syntax.**
 - **Navigation:** Centralized named route handling in `RouteGenerator` class within `main.dart`.
 - **Styling:** 
   - Supports Light and Dark modes via `AppTheme`.

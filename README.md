@@ -20,6 +20,7 @@ AI Loan Buddy is a futuristic, premium Flutter application designed to assist us
 ## Prerequisites
 
 - Flutter SDK version: **>=2.17.0 <3.0.0** (Tested on Flutter 3.x)
+- **Flutter Riverpod:** `^2.6.1` (Strictly required due to `StateNotifierProvider` usage. **Do not upgrade to v3**).
 - Dart SDK
 - Compatible Android emulator or physical device running Android
 

@@ -197,7 +197,7 @@ class ProfileScreen extends ConsumerWidget {
                             const SizedBox(height: 8),
                             Switch(
                               value: settings.themeMode == ThemeMode.dark,
-                              activeColor: AppTheme.accent1,
+                              activeThumbColor: AppTheme.accent1,
                               activeTrackColor: Colors.white24,
                               inactiveThumbColor: Colors.white,
                               inactiveTrackColor: Colors.white12,
