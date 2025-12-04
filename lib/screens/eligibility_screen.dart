@@ -1,6 +1,4 @@
-import 'package:ai_loan_buddy/models/document_item.dart';
 import 'package:ai_loan_buddy/providers/eligibility_provider.dart';
-import 'package:ai_loan_buddy/theme/app_theme.dart';
 import 'package:ai_loan_buddy/utils/dummy_methods.dart';
 import 'package:ai_loan_buddy/widgets/app_button.dart';
 import 'package:ai_loan_buddy/widgets/meter_gauge.dart';
@@ -93,8 +91,7 @@ class _EligibilityCheckerScreenState extends ConsumerState<EligibilityCheckerScr
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(eligibilityProvider);
-    final notifier = ref.read(eligibilityProvider.notifier);
-
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text('Eligibility Checker'),
@@ -140,7 +137,6 @@ class _EligibilityCheckerScreenState extends ConsumerState<EligibilityCheckerScr
   }
 
   Widget _buildPersonalInfoStep() {
-    final state = ref.watch(eligibilityProvider);
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Form(

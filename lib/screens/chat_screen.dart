@@ -201,7 +201,7 @@ class _QuickActionChip extends StatelessWidget {
       child: ActionChip(
         label: Text(label),
         onPressed: onTap,
-        backgroundColor: AppTheme.primary2.withOpacity(0.2),
+        backgroundColor: AppTheme.accent1.withOpacity(0.2),
         labelStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
               color: AppTheme.primary1,
               fontWeight: FontWeight.w600,

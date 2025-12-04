@@ -22,8 +22,8 @@ class ChatBubble extends StatelessWidget {
       bottomRight: Radius.circular(isUser ? 4 : 20),
     );
 
-    final bgColor = isUser ? AppTheme.primary1 : AppTheme.primary3.withOpacity(0.15);
-    final textColor = isUser ? AppTheme.neutralWhite : AppTheme.neutralDark;
+    final bgColor = isUser ? AppTheme.primary1 : AppTheme.accent2.withOpacity(0.15);
+    final textColor = isUser ? AppTheme.neutralWhite : AppTheme.backgroundBase;
 
     return Align(
       alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,

@@ -7,7 +7,6 @@ import 'package:ai_loan_buddy/widgets/language_selector_dropdown.dart';
 import 'package:ai_loan_buddy/widgets/profile_bubble_button.dart';
 import 'package:ai_loan_buddy/widgets/voice_detect_toggle.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,22 +14,26 @@ class HomeScreen extends StatefulWidget {
   static const ctaCardsData = [
     {
       'title': 'Start a Loan Conversation',
-      'lottieUrl': 'https://assets5.lottiefiles.com/packages/lf20_1pxqjqps.json',
+      'icon': Icons.chat_bubble_rounded,
+      'color': Color(0xFF4F47E5),
       'route': RouteNames.chat,
     },
     {
       'title': 'Check My Eligibility',
-      'lottieUrl': 'https://assets8.lottiefiles.com/packages/lf20_lq5r1hzy.json',
+      'icon': Icons.verified_user_rounded,
+      'color': Color(0xFF22D3C5),
       'route': RouteNames.eligibility,
     },
     {
       'title': 'Learn About Loans',
-      'lottieUrl': 'https://assets3.lottiefiles.com/packages/lf20_wldn4cgm.json',
+      'icon': Icons.school_rounded,
+      'color': Color(0xFF6A5AE0),
       'route': RouteNames.education,
     },
     {
       'title': 'Smart Document Checklist',
-      'lottieUrl': 'https://assets8.lottiefiles.com/packages/lf20_q4bm7x9p.json',
+      'icon': Icons.checklist_rtl_rounded,
+      'color': Color(0xFFFF7A45),
       'route': RouteNames.checklist,
     },
   ];
@@ -55,22 +58,39 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  Widget _buildCTACard(String title, String lottieUrl, VoidCallback onTap) {
+  Widget _buildCTACard(String title, IconData icon, Color iconColor, VoidCallback onTap) {
     return GlassCard(
       onTap: onTap,
       width: double.infinity,
       height: 140,
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(20),
       child: Row(
         children: [
-          SizedBox(
-            width: 100,
-            height: 100,
-            child: Lottie.network(
-              lottieUrl,
-              fit: BoxFit.contain,
-              repeat: true,
-              animate: true,
+          Container(
+            width: 80,
+            height: 80,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  iconColor,
+                  iconColor.withOpacity(0.7),
+                ],
+              ),
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: iconColor.withOpacity(0.4),
+                  blurRadius: 16,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: Icon(
+              icon,
+              size: 40,
+              color: Colors.white,
             ),
           ),
           const SizedBox(width: 20),
@@ -78,11 +98,18 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Text(
               title,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: AppTheme.primary1,
+                    color: Colors.white,
                     fontWeight: FontWeight.w700,
+                    shadows: [
+                      Shadow(
+                        color: Colors.black.withOpacity(0.3),
+                        offset: const Offset(0, 2),
+                        blurRadius: 4,
+                      ),
+                    ],
                   ),
             ),
-          )
+          ),
         ],
       ),
     );
@@ -90,7 +117,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
 
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -142,7 +168,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     final card = HomeScreen.ctaCardsData[index];
                     return _buildCTACard(
                       card['title'] as String,
-                      card['lottieUrl'] as String,
+                      card['icon'] as IconData,
+                      card['color'] as Color,
                       () {
                         Navigator.of(context).pushNamed(card['route'] as String);
                       },
