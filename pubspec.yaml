@@ -1,0 +1,25 @@
+name: ai_loan_buddy
+description: AI Loan Buddy - Your futuristic AI loan advisor app.
+publish_to: "none"
+
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_riverpod: ^2.3.6
+  google_fonts: ^4.0.4
+  lottie: ^1.4.3
+  flutter_svg: ^1.1.6
+  cupertino_icons: ^1.0.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    # No local assets, all Lottie animations and images loaded via network placeholders
