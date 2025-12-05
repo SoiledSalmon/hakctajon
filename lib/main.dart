@@ -1,13 +1,12 @@
+import 'package:ai_loan_buddy/screens/auth_screen.dart';
 import 'package:ai_loan_buddy/screens/chat_screen.dart';
 import 'package:ai_loan_buddy/screens/checklist_screen.dart';
 import 'package:ai_loan_buddy/screens/education_screen.dart';
 import 'package:ai_loan_buddy/screens/eligibility_screen.dart';
 import 'package:ai_loan_buddy/screens/home_screen.dart';
-import 'package:ai_loan_buddy/screens/login_screen.dart';
 import 'package:ai_loan_buddy/screens/pdf_preview_screen.dart';
 import 'package:ai_loan_buddy/screens/profile_screen.dart';
 import 'package:ai_loan_buddy/screens/settings_screen.dart';
-import 'package:ai_loan_buddy/screens/signup_screen.dart';
 import 'package:ai_loan_buddy/screens/splash_screen.dart';
 import 'package:ai_loan_buddy/theme/app_theme.dart';
 import 'package:ai_loan_buddy/utils/navigation.dart';
@@ -48,20 +47,25 @@ class RouteGenerator {
     switch (settings.name) {
       case RouteNames.splash:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
-      case RouteNames.signup:
-        return MaterialPageRoute(builder: (_) => const SignupScreen());
-      case RouteNames.login:
-        return MaterialPageRoute(builder: (_) => const LoginScreen());
+      case RouteNames.auth:
+        return MaterialPageRoute(builder: (_) => const AuthScreen());
+
       case RouteNames.home:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
       case RouteNames.chat:
         return MaterialPageRoute(builder: (_) => const AIChatScreen());
       case RouteNames.eligibility:
-        return MaterialPageRoute(builder: (_) => const EligibilityCheckerScreen());
+        return MaterialPageRoute(
+          builder: (_) => const EligibilityCheckerScreen(),
+        );
       case RouteNames.education:
-        return MaterialPageRoute(builder: (_) => const FinancialEducationScreen());
+        return MaterialPageRoute(
+          builder: (_) => const FinancialEducationScreen(),
+        );
       case RouteNames.checklist:
-        return MaterialPageRoute(builder: (_) => const SmartDocumentChecklistScreen());
+        return MaterialPageRoute(
+          builder: (_) => const SmartDocumentChecklistScreen(),
+        );
       case RouteNames.pdfPreview:
         return MaterialPageRoute(builder: (_) => const PDFPreviewScreen());
       case RouteNames.settings:
@@ -71,9 +75,7 @@ class RouteGenerator {
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
-            body: Center(
-              child: Text('No route defined for ${settings.name}'),
-            ),
+            body: Center(child: Text('No route defined for ${settings.name}')),
           ),
         );
     }

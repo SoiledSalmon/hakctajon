@@ -1,12 +1,14 @@
 import 'package:ai_loan_buddy/models/document_item.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final documentProvider = StateNotifierProvider<DocumentNotifier, List<DocumentItem>>((ref) {
-  return DocumentNotifier();
-});
+final documentProvider =
+    StateNotifierProvider<DocumentNotifier, List<DocumentItem>>((ref) {
+      return DocumentNotifier();
+    });
 
 class DocumentNotifier extends StateNotifier<List<DocumentItem>> {
-  DocumentNotifier() : super(List<DocumentItem>.from(DocumentItem.sampleDocuments));
+  DocumentNotifier()
+    : super(List<DocumentItem>.from(DocumentItem.sampleDocuments));
 
   void toggleCheck(String id) {
     state = [

@@ -28,21 +28,17 @@ class ProfileScreen extends ConsumerWidget {
         title: Text(
           'My Profile',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.w700,
-              ),
+            color: Colors.white,
+            fontWeight: FontWeight.w700,
+          ),
         ),
-
       ),
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              AppTheme.primary1,
-              AppTheme.backgroundBase,
-            ],
+            colors: [AppTheme.primary1, AppTheme.backgroundBase],
             stops: [0.0, 0.4],
           ),
         ),
@@ -75,7 +71,8 @@ class ProfileScreen extends ConsumerWidget {
                   child: Center(
                     child: Text(
                       'JD',
-                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      style: Theme.of(context).textTheme.headlineMedium
+                          ?.copyWith(
                             color: Colors.white,
                             fontWeight: FontWeight.w700,
                             fontSize: 32,
@@ -87,13 +84,16 @@ class ProfileScreen extends ConsumerWidget {
                 Text(
                   'John Doe',
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 const SizedBox(height: 8),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(20),
@@ -101,9 +101,9 @@ class ProfileScreen extends ConsumerWidget {
                   child: Text(
                     'Premium Member',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: AppTheme.accent1,
-                          fontWeight: FontWeight.w600,
-                        ),
+                      color: AppTheme.accent1,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 32),
@@ -120,9 +120,8 @@ class ProfileScreen extends ConsumerWidget {
                         children: [
                           Text(
                             'Personal Information',
-                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  fontWeight: FontWeight.w700,
-                                ),
+                            style: Theme.of(context).textTheme.titleMedium
+                                ?.copyWith(fontWeight: FontWeight.w700),
                           ),
                           TextButton(
                             onPressed: () {}, // Dummy action
@@ -133,7 +132,8 @@ class ProfileScreen extends ConsumerWidget {
                             ),
                             child: Text(
                               'Edit',
-                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              style: Theme.of(context).textTheme.bodyMedium
+                                  ?.copyWith(
                                     color: AppTheme.accent1,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -143,10 +143,18 @@ class ProfileScreen extends ConsumerWidget {
                       ),
                       const Divider(height: 32, color: Colors.white24),
                       _buildProfileRow(
-                          context, Icons.email_outlined, 'Email', 'john.doe@example.com'),
+                        context,
+                        Icons.email_outlined,
+                        'Email',
+                        'john.doe@example.com',
+                      ),
                       const SizedBox(height: 20),
                       _buildProfileRow(
-                          context, Icons.phone_outlined, 'Phone', '+1 (555) 123-4567'),
+                        context,
+                        Icons.phone_outlined,
+                        'Phone',
+                        '+1 (555) 123-4567',
+                      ),
                     ],
                   ),
                 ),
@@ -158,13 +166,17 @@ class ProfileScreen extends ConsumerWidget {
                   children: [
                     Expanded(
                       child: GlassCard(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 16,
+                        ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                               'Language',
-                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              style: Theme.of(context).textTheme.bodyMedium
+                                  ?.copyWith(
                                     color: Colors.white70,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -183,13 +195,19 @@ class ProfileScreen extends ConsumerWidget {
                     const SizedBox(width: 16),
                     Expanded(
                       child: GlassCard(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 16,
+                        ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              settings.themeMode == ThemeMode.light ? 'Light Mode' : 'Dark Mode',
-                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              settings.themeMode == ThemeMode.light
+                                  ? 'Light Mode'
+                                  : 'Dark Mode',
+                              style: Theme.of(context).textTheme.bodyMedium
+                                  ?.copyWith(
                                     color: Colors.white70,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -205,8 +223,8 @@ class ProfileScreen extends ConsumerWidget {
                                 settingsNotifier.toggleTheme();
                                 ref.read(appThemeProvider.notifier).state =
                                     settings.themeMode == ThemeMode.light
-                                        ? ThemeMode.dark
-                                        : ThemeMode.light;
+                                    ? ThemeMode.dark
+                                    : ThemeMode.light;
                               },
                             ),
                           ],
@@ -223,18 +241,23 @@ class ProfileScreen extends ConsumerWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).pushNamedAndRemoveUntil(RouteNames.signup, (route) => false);
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                        RouteNames.auth,
+                        (route) => false,
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white.withOpacity(0.1),
-                      side: BorderSide(color: AppTheme.warning.withOpacity(0.5)),
+                      side: BorderSide(
+                        color: AppTheme.warning.withOpacity(0.5),
+                      ),
                     ),
                     child: Text(
                       'Log Out',
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            color: AppTheme.warning,
-                            fontWeight: FontWeight.w600,
-                          ),
+                        color: AppTheme.warning,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                 ),
@@ -247,7 +270,12 @@ class ProfileScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildProfileRow(BuildContext context, IconData icon, String label, String value) {
+  Widget _buildProfileRow(
+    BuildContext context,
+    IconData icon,
+    String label,
+    String value,
+  ) {
     return Row(
       children: [
         Icon(icon, color: Colors.white70, size: 20),
@@ -258,15 +286,15 @@ class ProfileScreen extends ConsumerWidget {
             Text(
               label,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.white54,
-                    fontSize: 12,
-                  ),
+                color: Colors.white54,
+                fontSize: 12,
+              ),
             ),
             Text(
               value,
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    fontWeight: FontWeight.w500,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500),
             ),
           ],
         ),

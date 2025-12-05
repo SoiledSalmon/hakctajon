@@ -14,20 +14,14 @@ class ProfileBubbleButton extends StatelessWidget {
           return;
         }
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Profile action tapped (dummy)'),
-          ),
+          const SnackBar(content: Text('Profile action tapped (dummy)')),
         );
       },
       borderRadius: BorderRadius.circular(40),
       child: CircleAvatar(
         radius: 22,
         backgroundColor: Colors.grey.shade300,
-        child: const Icon(
-          Icons.person,
-          color: Colors.black54,
-          size: 28,
-        ),
+        child: const Icon(Icons.person, color: Colors.black54, size: 28),
       ),
     );
   }

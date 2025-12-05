@@ -9,10 +9,12 @@ class EligibilityCheckerScreen extends ConsumerStatefulWidget {
   const EligibilityCheckerScreen({super.key});
 
   @override
-  ConsumerState<EligibilityCheckerScreen> createState() => _EligibilityCheckerScreenState();
+  ConsumerState<EligibilityCheckerScreen> createState() =>
+      _EligibilityCheckerScreenState();
 }
 
-class _EligibilityCheckerScreenState extends ConsumerState<EligibilityCheckerScreen> {
+class _EligibilityCheckerScreenState
+    extends ConsumerState<EligibilityCheckerScreen> {
   final PageController _pageController = PageController();
 
   final _personalInfoFormKey = GlobalKey<FormState>();
@@ -42,7 +44,9 @@ class _EligibilityCheckerScreenState extends ConsumerState<EligibilityCheckerScr
     switch (state.currentStep) {
       case 0:
         if (!_personalInfoFormKey.currentState!.validate()) return;
-        ref.read(eligibilityProvider.notifier).updatePersonalInfo(
+        ref
+            .read(eligibilityProvider.notifier)
+            .updatePersonalInfo(
               age: int.tryParse(_ageController.text),
               loanType: _selectedLoanType,
               incomeSource: _selectedIncomeSource,
@@ -50,7 +54,9 @@ class _EligibilityCheckerScreenState extends ConsumerState<EligibilityCheckerScr
         break;
       case 1:
         if (!_financialProfileFormKey.currentState!.validate()) return;
-        ref.read(eligibilityProvider.notifier).updateFinancialProfile(
+        ref
+            .read(eligibilityProvider.notifier)
+            .updateFinancialProfile(
               salary: double.tryParse(_salaryController.text),
               emi: double.tryParse(_emiController.text),
               creditCardUsage: double.tryParse(_ccUsageController.text),
@@ -91,7 +97,7 @@ class _EligibilityCheckerScreenState extends ConsumerState<EligibilityCheckerScr
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(eligibilityProvider);
-    
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Eligibility Checker'),
@@ -118,16 +124,15 @@ class _EligibilityCheckerScreenState extends ConsumerState<EligibilityCheckerScr
           children: [
             if (state.currentStep > 0)
               Expanded(
-                child: AppButton(
-                  label: 'Back',
-                  onPressed: _previousStep,
-                ),
+                child: AppButton(label: 'Back', onPressed: _previousStep),
               ),
             if (state.currentStep > 0) const SizedBox(width: 12),
             Expanded(
               child: AppButton(
                 label: state.currentStep == 3 ? 'Close' : 'Next',
-                onPressed: state.currentStep == 3 ? () => Navigator.of(context).pop() : _nextStep,
+                onPressed: state.currentStep == 3
+                    ? () => Navigator.of(context).pop()
+                    : _nextStep,
               ),
             ),
           ],
@@ -174,7 +179,9 @@ class _EligibilityCheckerScreenState extends ConsumerState<EligibilityCheckerScr
                   .map(
                     (lt) => DropdownMenuItem(
                       value: lt,
-                      child: Text(lt.name[0].toUpperCase() + lt.name.substring(1)),
+                      child: Text(
+                        lt.name[0].toUpperCase() + lt.name.substring(1),
+                      ),
                     ),
                   )
                   .toList(),
@@ -192,7 +199,9 @@ class _EligibilityCheckerScreenState extends ConsumerState<EligibilityCheckerScr
                   .map(
                     (isrc) => DropdownMenuItem(
                       value: isrc,
-                      child: Text(isrc.name[0].toUpperCase() + isrc.name.substring(1)),
+                      child: Text(
+                        isrc.name[0].toUpperCase() + isrc.name.substring(1),
+                      ),
                     ),
                   )
                   .toList(),
@@ -286,17 +295,20 @@ class _EligibilityCheckerScreenState extends ConsumerState<EligibilityCheckerScr
           CheckboxListTile(
             title: const Text('PAN Card'),
             value: state.formData.panChecked,
-            onChanged: (val) => notifier.updateDocuments(panChecked: val ?? false),
+            onChanged: (val) =>
+                notifier.updateDocuments(panChecked: val ?? false),
           ),
           CheckboxListTile(
             title: const Text('Aadhaar Card'),
             value: state.formData.aadhaarChecked,
-            onChanged: (val) => notifier.updateDocuments(aadhaarChecked: val ?? false),
+            onChanged: (val) =>
+                notifier.updateDocuments(aadhaarChecked: val ?? false),
           ),
           CheckboxListTile(
             title: const Text('Payslips'),
             value: state.formData.payslipsChecked,
-            onChanged: (val) => notifier.updateDocuments(payslipsChecked: val ?? false),
+            onChanged: (val) =>
+                notifier.updateDocuments(payslipsChecked: val ?? false),
           ),
         ],
       ),
@@ -321,7 +333,9 @@ class _EligibilityCheckerScreenState extends ConsumerState<EligibilityCheckerScr
               child: AppButton(
                 label: 'Run Eligibility Check',
                 onPressed: () async {
-                  await ref.read(eligibilityProvider.notifier).runEligibilityCheck();
+                  await ref
+                      .read(eligibilityProvider.notifier)
+                      .runEligibilityCheck();
                   setState(() {});
                 },
               ),
@@ -334,11 +348,13 @@ class _EligibilityCheckerScreenState extends ConsumerState<EligibilityCheckerScr
             ),
             const SizedBox(height: 24),
             Text(
-              result.approved ? 'Congratulations! You are eligible.' : 'Sorry, you are not eligible.',
+              result.approved
+                  ? 'Congratulations! You are eligible.'
+                  : 'Sorry, you are not eligible.',
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: result.approved ? Colors.green : Colors.red,
-                    fontWeight: FontWeight.w700,
-                  ),
+                color: result.approved ? Colors.green : Colors.red,
+                fontWeight: FontWeight.w700,
+              ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 12),
@@ -357,7 +373,9 @@ class _EligibilityCheckerScreenState extends ConsumerState<EligibilityCheckerScr
               onPressed: () {
                 generatePDF();
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('PDF summary generation (dummy)')),
+                  const SnackBar(
+                    content: Text('PDF summary generation (dummy)'),
+                  ),
                 );
               },
             ),

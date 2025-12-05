@@ -10,9 +10,7 @@ class FinancialEducationScreen extends StatelessWidget {
     final courses = Course.sampleCourses;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Financial Education'),
-      ),
+      appBar: AppBar(title: const Text('Financial Education')),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -29,9 +27,11 @@ class FinancialEducationScreen extends StatelessWidget {
               return CourseCard(
                 course: course,
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) => CourseDetailScreen(course: course),
-                  ));
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => CourseDetailScreen(course: course),
+                    ),
+                  );
                 },
               );
             },
@@ -50,9 +50,7 @@ class CourseDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(course.title),
-      ),
+      appBar: AppBar(title: Text(course.title)),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.all(20),

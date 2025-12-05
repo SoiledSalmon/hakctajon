@@ -71,16 +71,18 @@ class EligibilityState {
 
 final eligibilityProvider =
     StateNotifierProvider<EligibilityNotifier, EligibilityState>((ref) {
-  return EligibilityNotifier();
-});
+      return EligibilityNotifier();
+    });
 
 class EligibilityNotifier extends StateNotifier<EligibilityState> {
   EligibilityNotifier()
-      : super(EligibilityState(
+    : super(
+        EligibilityState(
           currentStep: 0,
           formData: EligibilityFormData(),
           result: null,
-        ));
+        ),
+      );
 
   void updateCurrentStep(int step) {
     state = state.copyWith(currentStep: step);

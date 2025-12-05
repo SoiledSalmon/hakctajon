@@ -24,12 +24,14 @@ class _RippleMicAnimationState extends State<RippleMicAnimation>
       duration: const Duration(seconds: 2),
     )..repeat();
 
-    _radiusAnimation = Tween<double>(begin: 30, end: 60).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeOut),
-    );
-    _opacityAnimation = Tween<double>(begin: 0.4, end: 0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeOut),
-    );
+    _radiusAnimation = Tween<double>(
+      begin: 30,
+      end: 60,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
+    _opacityAnimation = Tween<double>(
+      begin: 0.4,
+      end: 0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
   }
 
   @override
@@ -56,7 +58,9 @@ class _RippleMicAnimationState extends State<RippleMicAnimation>
                   height: _radiusAnimation.value * 2,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: AppTheme.primary1.withOpacity(_opacityAnimation.value),
+                    color: AppTheme.primary1.withOpacity(
+                      _opacityAnimation.value,
+                    ),
                   ),
                 );
               },
@@ -88,11 +92,7 @@ class GlassMicButton extends StatelessWidget {
           ),
         ],
       ),
-      child: const Icon(
-        Icons.mic,
-        color: Colors.white,
-        size: 36,
-      ),
+      child: const Icon(Icons.mic, color: Colors.white, size: 36),
     );
   }
 }

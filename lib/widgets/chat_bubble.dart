@@ -7,11 +7,7 @@ class ChatBubble extends StatelessWidget {
   final ChatMessage message;
   final bool isUser;
 
-  const ChatBubble({
-    super.key,
-    required this.message,
-    required this.isUser,
-  });
+  const ChatBubble({super.key, required this.message, required this.isUser});
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +18,17 @@ class ChatBubble extends StatelessWidget {
       bottomRight: Radius.circular(isUser ? 4 : 20),
     );
 
-    final bgColor = isUser ? AppTheme.primary1 : AppTheme.accent2.withOpacity(0.15);
+    final bgColor = isUser
+        ? AppTheme.primary1
+        : AppTheme.accent2.withOpacity(0.15);
     final textColor = isUser ? AppTheme.neutralWhite : AppTheme.backgroundBase;
 
     return Align(
       alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
-        constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.7),
+        constraints: BoxConstraints(
+          maxWidth: MediaQuery.of(context).size.width * 0.7,
+        ),
         margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(

@@ -59,10 +59,10 @@ class AppButton extends StatelessWidget {
           foregroundColor: AppTheme.neutralWhite,
           elevation: 0, // Handled by Container for softer shadow
           textStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.w600,
-                fontFamily: 'Poppins',
-                color: AppTheme.neutralWhite,
-              ),
+            fontWeight: FontWeight.w600,
+            fontFamily: 'Poppins',
+            color: AppTheme.neutralWhite,
+          ),
         ),
         onPressed: isLoading ? null : onPressed,
         child: child,

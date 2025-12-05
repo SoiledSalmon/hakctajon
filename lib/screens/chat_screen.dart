@@ -125,7 +125,9 @@ class _AIChatScreenState extends ConsumerState<AIChatScreen> {
                       label: 'Explain loan types',
                       onTap: () {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Explain loan types tapped (dummy)')),
+                          const SnackBar(
+                            content: Text('Explain loan types tapped (dummy)'),
+                          ),
                         );
                       },
                     ),
@@ -133,7 +135,9 @@ class _AIChatScreenState extends ConsumerState<AIChatScreen> {
                       label: 'My next step',
                       onTap: () {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('My next step tapped (dummy)')),
+                          const SnackBar(
+                            content: Text('My next step tapped (dummy)'),
+                          ),
                         );
                       },
                     ),
@@ -151,7 +155,9 @@ class _AIChatScreenState extends ConsumerState<AIChatScreen> {
                     onPressed: () {
                       startVoiceInput();
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Voice input started (dummy)')),
+                        const SnackBar(
+                          content: Text('Voice input started (dummy)'),
+                        ),
                       );
                     },
                     icon: const Icon(Icons.mic),
@@ -169,7 +175,9 @@ class _AIChatScreenState extends ConsumerState<AIChatScreen> {
                   IconButton(
                     onPressed: () {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Attachment tapped (dummy)')),
+                        const SnackBar(
+                          content: Text('Attachment tapped (dummy)'),
+                        ),
                       );
                     },
                     icon: const Icon(Icons.attach_file),
@@ -203,9 +211,9 @@ class _QuickActionChip extends StatelessWidget {
         onPressed: onTap,
         backgroundColor: AppTheme.accent1.withOpacity(0.2),
         labelStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: AppTheme.primary1,
-              fontWeight: FontWeight.w600,
-            ),
+          color: AppTheme.primary1,
+          fontWeight: FontWeight.w600,
+        ),
       ),
     );
   }

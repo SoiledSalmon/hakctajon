@@ -12,7 +12,8 @@ class LanguageSelectorDropdown extends StatefulWidget {
   });
 
   @override
-  State<LanguageSelectorDropdown> createState() => _LanguageSelectorDropdownState();
+  State<LanguageSelectorDropdown> createState() =>
+      _LanguageSelectorDropdownState();
 }
 
 class _LanguageSelectorDropdownState extends State<LanguageSelectorDropdown> {
@@ -43,12 +44,7 @@ class _LanguageSelectorDropdownState extends State<LanguageSelectorDropdown> {
       underline: const SizedBox.shrink(),
       dropdownColor: Colors.white.withOpacity(0.9),
       items: languages
-          .map(
-            (lang) => DropdownMenuItem(
-              value: lang,
-              child: Text(lang),
-            ),
-          )
+          .map((lang) => DropdownMenuItem(value: lang, child: Text(lang)))
           .toList(),
       onChanged: (value) {
         if (value != null && value != selectedLanguage) {

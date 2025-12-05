@@ -1,4 +1,3 @@
-
 enum Sender { user, ai }
 
 class ChatMessage {

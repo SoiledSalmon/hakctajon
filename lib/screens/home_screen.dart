@@ -58,7 +58,12 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  Widget _buildCTACard(String title, IconData icon, Color iconColor, VoidCallback onTap) {
+  Widget _buildCTACard(
+    String title,
+    IconData icon,
+    Color iconColor,
+    VoidCallback onTap,
+  ) {
     return GlassCard(
       onTap: onTap,
       width: double.infinity,
@@ -75,10 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [
-                  iconColor,
-                  iconColor.withOpacity(0.7),
-                ],
+                colors: [iconColor, iconColor.withOpacity(0.7)],
               ),
               borderRadius: BorderRadius.circular(isPressed ? 18 : 20),
               boxShadow: [
@@ -89,29 +91,28 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            child: Icon(
-              icon,
-              size: 45,
-              color: Colors.white,
-            ),
+            child: Icon(icon, size: 45, color: Colors.white),
           ),
           const SizedBox(width: 20),
           Expanded(
             child: Text(
               title,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 0.5,
-                    fontSize: (Theme.of(context).textTheme.headlineSmall?.fontSize ?? 24) + 2,
-                    shadows: [
-                      Shadow(
-                        color: Colors.black.withOpacity(0.3),
-                        offset: const Offset(0, 2),
-                        blurRadius: 4,
-                      ),
-                    ],
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+                letterSpacing: 0.5,
+                fontSize:
+                    (Theme.of(context).textTheme.headlineSmall?.fontSize ??
+                        24) +
+                    2,
+                shadows: [
+                  Shadow(
+                    color: Colors.black.withOpacity(0.3),
+                    offset: const Offset(0, 2),
+                    blurRadius: 4,
                   ),
+                ],
+              ),
             ),
           ),
         ],
@@ -121,7 +122,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
@@ -136,7 +136,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   Expanded(
                     child: Text(
                       "Hi! I'm your AI Loan Advisor 👋",
-                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      style: Theme.of(context).textTheme.headlineMedium
+                          ?.copyWith(
                             fontWeight: FontWeight.w700,
                             color: AppTheme.primary1,
                           ),
@@ -173,7 +174,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       card['icon'] as IconData,
                       card['color'] as Color,
                       () {
-                        Navigator.of(context).pushNamed(card['route'] as String);
+                        Navigator.of(
+                          context,
+                        ).pushNamed(card['route'] as String);
                       },
                     );
                   },
@@ -188,7 +191,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     startVoiceInput();
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Voice input started (dummy)')),
+                      const SnackBar(
+                        content: Text('Voice input started (dummy)'),
+                      ),
                     );
                   },
                 ),

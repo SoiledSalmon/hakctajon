@@ -6,11 +6,7 @@ class CourseCard extends StatelessWidget {
   final Course course;
   final VoidCallback onTap;
 
-  const CourseCard({
-    super.key,
-    required this.course,
-    required this.onTap,
-  });
+  const CourseCard({super.key, required this.course, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +34,9 @@ class CourseCard extends StatelessWidget {
               child: Text(
                 course.title,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: AppTheme.primary1,
-                      fontWeight: FontWeight.w600,
-                    ),
+                  color: AppTheme.primary1,
+                  fontWeight: FontWeight.w600,
+                ),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),

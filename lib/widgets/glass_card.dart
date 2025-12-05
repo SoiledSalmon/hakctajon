@@ -20,7 +20,10 @@ class GlassCard extends StatefulWidget {
     this.width,
     this.height,
     this.splashColor,
-  }) : assert(child != null || childBuilder != null, 'Either child or childBuilder must be provided');
+  }) : assert(
+         child != null || childBuilder != null,
+         'Either child or childBuilder must be provided',
+       );
 
   @override
   State<GlassCard> createState() => _GlassCardState();
@@ -101,8 +104,8 @@ class _GlassCardState extends State<GlassCard> {
                           : widget.child!,
                     )
                   : (widget.childBuilder != null
-                      ? widget.childBuilder!(context, _isActive)
-                      : widget.child!),
+                        ? widget.childBuilder!(context, _isActive)
+                        : widget.child!),
             ),
           ),
         ),

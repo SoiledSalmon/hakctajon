@@ -62,17 +62,31 @@ class _MeterGaugePainter extends CustomPainter {
     );
 
     final foregroundPaint = Paint()
-      ..shader = gradient.createShader(Rect.fromCircle(center: center, radius: radius))
+      ..shader = gradient.createShader(
+        Rect.fromCircle(center: center, radius: radius),
+      )
       ..strokeWidth = strokeWidth
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
 
     // Draw background semi-circle
-    canvas.drawArc(Rect.fromCircle(center: center, radius: radius), pi, pi, false, backgroundPaint);
+    canvas.drawArc(
+      Rect.fromCircle(center: center, radius: radius),
+      pi,
+      pi,
+      false,
+      backgroundPaint,
+    );
 
     // Draw foreground arc based on value
     final sweepAngle = pi * value.clamp(0.0, 1.0);
-    canvas.drawArc(Rect.fromCircle(center: center, radius: radius), pi, sweepAngle, false, foregroundPaint);
+    canvas.drawArc(
+      Rect.fromCircle(center: center, radius: radius),
+      pi,
+      sweepAngle,
+      false,
+      foregroundPaint,
+    );
   }
 
   @override

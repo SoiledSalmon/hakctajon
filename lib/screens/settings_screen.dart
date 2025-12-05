@@ -15,9 +15,7 @@ class SettingsScreen extends ConsumerWidget {
     final settingsNotifier = ref.read(settingsProvider.notifier);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Settings'),
-      ),
+      appBar: AppBar(title: const Text('Settings')),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24),
@@ -35,17 +33,21 @@ class SettingsScreen extends ConsumerWidget {
                 },
               ),
               const SizedBox(height: 24),
-              Text(
-                'Theme',
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
+              Text('Theme', style: Theme.of(context).textTheme.headlineSmall),
               SwitchListTile(
-                title: Text(settings.themeMode == ThemeMode.light ? 'Light Mode' : 'Dark Mode'),
+                title: Text(
+                  settings.themeMode == ThemeMode.light
+                      ? 'Light Mode'
+                      : 'Dark Mode',
+                ),
                 value: settings.themeMode == ThemeMode.dark,
                 onChanged: (_) {
                   settingsNotifier.toggleTheme();
-                  ref.read(appThemeProvider.notifier).state =
-                      settings.themeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
+                  ref
+                      .read(appThemeProvider.notifier)
+                      .state = settings.themeMode == ThemeMode.light
+                      ? ThemeMode.dark
+                      : ThemeMode.light;
                 },
               ),
               const SizedBox(height: 24),

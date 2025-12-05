@@ -8,7 +8,8 @@ class TypingDotsAnimation extends StatefulWidget {
   State<TypingDotsAnimation> createState() => _TypingDotsAnimationState();
 }
 
-class _TypingDotsAnimationState extends State<TypingDotsAnimation> with SingleTickerProviderStateMixin {
+class _TypingDotsAnimationState extends State<TypingDotsAnimation>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late List<Animation<double>> _dotOpacities;
 

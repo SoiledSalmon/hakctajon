@@ -1,17 +1,21 @@
 import 'dart:async';
+import 'package:ai_loan_buddy/providers/user_provider.dart';
 import 'package:ai_loan_buddy/theme/app_theme.dart';
 import 'package:ai_loan_buddy/utils/navigation.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  ConsumerState<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
+class _SplashScreenState extends ConsumerState<SplashScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animController;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
@@ -19,20 +23,34 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   @override
   void initState() {
     super.initState();
-    _animController = AnimationController(vsync: this, duration: const Duration(seconds: 2));
+    _animController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    );
 
     _fadeAnimation = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(parent: _animController, curve: Curves.easeInOut),
     );
-    _slideAnimation = Tween<Offset>(begin: const Offset(0, 0.2), end: Offset.zero).animate(
-      CurvedAnimation(parent: _animController, curve: Curves.easeInOut),
-    );
+    _slideAnimation =
+        Tween<Offset>(begin: const Offset(0, 0.2), end: Offset.zero).animate(
+          CurvedAnimation(parent: _animController, curve: Curves.easeInOut),
+        );
 
     _animController.forward();
 
-    Timer(const Duration(seconds: 2), () {
-      if (mounted) {
-        Navigator.of(context).pushReplacementNamed(RouteNames.signup);
+    Timer(const Duration(seconds: 2), () async {
+      if (!mounted) return;
+
+      // Populate user data from Firebase Auth
+      await ref.read(userProvider.notifier).fetchUserData();
+
+      if (!mounted) return;
+
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        NavigationUtils.pushReplacementNamed(context, RouteNames.home);
+      } else {
+        NavigationUtils.pushReplacementNamed(context, RouteNames.auth);
       }
     });
   }
@@ -79,10 +97,9 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                   const SizedBox(height: 24),
                   Text(
                     'Your Loan Buddy. In Your Language.',
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineMedium
-                        ?.copyWith(color: AppTheme.neutralWhite),
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      color: AppTheme.neutralWhite,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                 ],

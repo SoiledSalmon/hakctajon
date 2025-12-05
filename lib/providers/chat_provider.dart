@@ -4,8 +4,9 @@ import 'package:ai_loan_buddy/utils/dummy_methods.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
-final chatProvider =
-    StateNotifierProvider<ChatNotifier, List<ChatMessage>>((ref) => ChatNotifier());
+final chatProvider = StateNotifierProvider<ChatNotifier, List<ChatMessage>>(
+  (ref) => ChatNotifier(),
+);
 
 class ChatNotifier extends StateNotifier<List<ChatMessage>> {
   ChatNotifier() : super(_initialMessages);

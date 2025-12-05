@@ -14,9 +14,7 @@ class SmartDocumentChecklistScreen extends ConsumerWidget {
     final progress = notifier.progress;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Smart Document Checklist'),
-      ),
+      appBar: AppBar(title: const Text('Smart Document Checklist')),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
@@ -36,7 +34,10 @@ class SmartDocumentChecklistScreen extends ConsumerWidget {
                   itemBuilder: (context, index) {
                     final doc = documents[index];
                     return GlassCard(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
                       child: Row(
                         children: [
                           Icon(
@@ -51,7 +52,10 @@ class SmartDocumentChecklistScreen extends ConsumerWidget {
                               children: [
                                 Text(
                                   doc.title,
-                                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineSmall
+                                      ?.copyWith(
                                         fontWeight: FontWeight.w700,
                                         color: AppTheme.primary1,
                                       ),

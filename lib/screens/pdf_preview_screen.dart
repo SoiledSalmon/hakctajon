@@ -28,9 +28,7 @@ class PDFPreviewScreen extends StatelessWidget {
         'Based on your profile and documents, you are eligible for a personal loan between ₹50,000 and ₹200,000. Please submit the missing payslips to improve approval chances.';
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('PDF Preview'),
-      ),
+      appBar: AppBar(title: const Text('PDF Preview')),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20),
@@ -61,7 +59,10 @@ class PDFPreviewScreen extends StatelessWidget {
                   ...dummyProfile.entries.map(
                     (e) => Padding(
                       padding: const EdgeInsets.symmetric(vertical: 4),
-                      child: Text('${e.key}: ${e.value}', style: const TextStyle(fontSize: 16)),
+                      child: Text(
+                        '${e.key}: ${e.value}',
+                        style: const TextStyle(fontSize: 16),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 24),
@@ -73,7 +74,10 @@ class PDFPreviewScreen extends StatelessWidget {
                   ...dummyEligibility.entries.map(
                     (e) => Padding(
                       padding: const EdgeInsets.symmetric(vertical: 4),
-                      child: Text('${e.key}: ${e.value}', style: const TextStyle(fontSize: 16)),
+                      child: Text(
+                        '${e.key}: ${e.value}',
+                        style: const TextStyle(fontSize: 16),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 24),
@@ -107,7 +111,10 @@ class PDFPreviewScreen extends StatelessWidget {
                       icon: const Icon(Icons.download),
                       label: const Text('Download PDF'),
                       style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 14),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 36,
+                          vertical: 14,
+                        ),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                         ),
@@ -119,7 +126,7 @@ class PDFPreviewScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
