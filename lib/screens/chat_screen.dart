@@ -5,6 +5,7 @@ import 'package:ai_loan_buddy/utils/dummy_methods.dart';
 import 'package:ai_loan_buddy/widgets/chat_bubble.dart';
 import 'package:ai_loan_buddy/widgets/language_selector_dropdown.dart';
 import 'package:ai_loan_buddy/widgets/typing_indicator.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
@@ -46,6 +47,30 @@ class _AIChatScreenState extends ConsumerState<AIChatScreen> {
         );
       }
     });
+  }
+
+  void _handleFilePicked(PlatformFile file) {
+    // Check file size (limit to 10MB)
+    const int maxFileSize = 10 * 1024 * 1024; // 10 MB
+    if (file.size > maxFileSize) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('File is too large. Maximum size is 10MB.'),
+          backgroundColor: Theme.of(context).colorScheme.error,
+        ),
+      );
+      return;
+    }
+
+    final sizeInKb = (file.size / 1024).toStringAsFixed(1);
+    final fileInfo = "[File] ${file.name} ($sizeInKb KB)";
+
+    ref.read(chatProvider.notifier).sendUserMessage(fileInfo);
+    _scrollToBottom();
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Attached: ${file.name}')),
+    );
   }
 
   void _showAttachmentOptions() {
@@ -90,11 +115,28 @@ class _AIChatScreenState extends ConsumerState<AIChatScreen> {
                 'Upload Document',
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
               ),
-              onTap: () {
+              onTap: () async {
                 Navigator.pop(context);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Document selected')),
-                );
+                try {
+                  final result = await FilePicker.platform.pickFiles(
+                    type: FileType.custom,
+                    allowedExtensions: ['pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png'],
+                  );
+                  
+                  if (!mounted) return;
+
+                  if (result != null && result.files.isNotEmpty) {
+                    _handleFilePicked(result.files.first);
+                  }
+                } catch (e) {
+                  if (!mounted) return;
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Error picking file: $e'),
+                      backgroundColor: Theme.of(context).colorScheme.error,
+                    ),
+                  );
+                }
               },
             ),
             ListTile(
@@ -110,11 +152,27 @@ class _AIChatScreenState extends ConsumerState<AIChatScreen> {
                 'Gallery',
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
               ),
-              onTap: () {
+              onTap: () async {
                 Navigator.pop(context);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Gallery selected')),
-                );
+                try {
+                  final result = await FilePicker.platform.pickFiles(
+                    type: FileType.image,
+                  );
+
+                  if (!mounted) return;
+
+                  if (result != null && result.files.isNotEmpty) {
+                    _handleFilePicked(result.files.first);
+                  }
+                } catch (e) {
+                  if (!mounted) return;
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Error picking image: $e'),
+                      backgroundColor: Theme.of(context).colorScheme.error,
+                    ),
+                  );
+                }
               },
             ),
             const SizedBox(height: 16),
