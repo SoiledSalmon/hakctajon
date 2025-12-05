@@ -1,9 +1,14 @@
+import 'package:flutter/material.dart';
+
 class Course {
   final String id;
   final String title;
   final String description;
   final String illustrationUrl;
   final String audioSummaryUrl;
+  final IconData iconData;
+  final String category;
+  final String duration;
 
   Course({
     required this.id,
@@ -11,53 +16,83 @@ class Course {
     required this.description,
     required this.illustrationUrl,
     required this.audioSummaryUrl,
+    required this.iconData,
+    required this.category,
+    required this.duration,
   });
 
   static List<Course> sampleCourses = [
     Course(
       id: 'c1',
-      title: 'What Is CIBIL?',
+      title: 'Understanding CIBIL & Credit Score',
       description:
-          'Learn about the CIBIL credit score, how it affects your loan approval chances, and ways to improve it.',
+          'Your credit score is the single most important factor in loan approvals. Learn how CIBIL scores are calculated, what factors negatively impact them, and practical steps to improve your score over time. A good score can save you thousands in interest rates.',
       illustrationUrl:
-          'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80',
+          'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80',
       audioSummaryUrl: '',
+      iconData: Icons.assessment,
+      category: 'Essential',
+      duration: '5 min read',
     ),
     Course(
       id: 'c2',
-      title: 'Why Banks Reject Loans',
+      title: 'Why Loan Applications Get Rejected',
       description:
-          'Understand common reasons why banks reject loan applications and how you can avoid these pitfalls.',
+          'Rejection can be disheartening. Discover the top reasons lenders turn down applications—from high debt-to-income ratios to incomplete documentation. Learn how to pre-screen your own profile to ensure a smooth approval process.',
       illustrationUrl:
-          'https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=400&q=80',
+          'https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=800&q=80',
       audioSummaryUrl: '',
+      iconData: Icons.warning_amber_rounded,
+      category: 'Basics',
+      duration: '4 min read',
     ),
     Course(
       id: 'c3',
-      title: 'How EMI Works',
+      title: 'EMI Calculator & Interest Types',
       description:
-          'A detailed look at Equated Monthly Installments (EMI) and how they affect your loan repayment.',
+          'Confused by Flat vs. Reducing balance interest rates? Master the math behind Equated Monthly Installments (EMIs). We explain how simple and compound interest work so you can choose the loan structure that costs you the least in the long run.',
       illustrationUrl:
-          'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80',
+          'https://images.unsplash.com/photo-1565514020176-dbf2238cdb74?auto=format&fit=crop&w=800&q=80',
       audioSummaryUrl: '',
+      iconData: Icons.calculate,
+      category: 'Advanced',
+      duration: '7 min read',
     ),
     Course(
       id: 'c4',
-      title: 'Simple vs Compound Interest',
+      title: 'Types of Loans & Which to Choose',
       description:
-          'Learn the difference between simple and compound interest and their impact on loan costs.',
+          'Not all loans are created equal. Explore the differences between personal, home, education, and business loans. Understand secured vs. unsecured loans to pick the right financial product for your specific needs.',
       illustrationUrl:
-          'https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=400&q=80',
+          'https://images.unsplash.com/photo-1601597111158-2fceff292cdc?auto=format&fit=crop&w=800&q=80',
       audioSummaryUrl: '',
+      iconData: Icons.account_balance,
+      category: 'Guide',
+      duration: '6 min read',
     ),
     Course(
       id: 'c5',
-      title: 'Improve Approval Chances',
+      title: 'Documents Required for Approval',
       description:
-          'Tips and tricks on how to improve your chances of getting a loan approved by financial institutions.',
+          'Don\'t let missing paperwork delay your funds. Get a comprehensive checklist of KYC documents, income proofs for salaried vs. self-employed individuals, and property documents needed for secured loans.',
       illustrationUrl:
-          'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80',
+          'https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=800&q=80',
       audioSummaryUrl: '',
+      iconData: Icons.folder_open,
+      category: 'Checklist',
+      duration: '3 min read',
+    ),
+    Course(
+      id: 'c6',
+      title: 'Loan Repayment Strategies',
+      description:
+          'Smart repayment can make you debt-free faster. Learn about prepayment options, how to manage loan defaults if you face a financial crisis, and the benefits of foreclosure to save on interest costs.',
+      illustrationUrl:
+          'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=800&q=80',
+      audioSummaryUrl: '',
+      iconData: Icons.trending_up,
+      category: 'Strategy',
+      duration: '5 min read',
     ),
   ];
 }

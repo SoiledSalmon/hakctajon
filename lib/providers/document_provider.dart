@@ -19,6 +19,7 @@ class DocumentNotifier extends StateNotifier<List<DocumentItem>> {
             title: doc.title,
             iconData: doc.iconData,
             description: doc.description,
+            category: doc.category,
             isChecked: !doc.isChecked,
           )
         else
@@ -31,4 +32,10 @@ class DocumentNotifier extends StateNotifier<List<DocumentItem>> {
     final checkedCount = state.where((doc) => doc.isChecked).length;
     return checkedCount / state.length;
   }
+
+  int get checkedCount {
+    return state.where((doc) => doc.isChecked).length;
+  }
+  
+  int get totalCount => state.length;
 }
