@@ -1,7 +1,5 @@
 
-# Project Title
-
-### *Flutter · Firebase · Gemini AI · Hackathon Edition*
+# LoanBuddy
 
 LoanBuddy is a multilingual AI-powered loan advisory application designed to simplify the loan application experience for users in India.  
 It provides **real-time eligibility checks**, **document guidance**, and **simple financial explanations** through a conversational chat interface supporting **English**.
