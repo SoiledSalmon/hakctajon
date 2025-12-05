@@ -23,6 +23,10 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
   @override
   void initState() {
     super.initState();
+
+    // -------------------------------------------------------
+    // ANIMATIONS
+    // -------------------------------------------------------
     _animController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 2),
@@ -31,25 +35,32 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
     _fadeAnimation = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(parent: _animController, curve: Curves.easeInOut),
     );
+
     _slideAnimation =
         Tween<Offset>(begin: const Offset(0, 0.2), end: Offset.zero).animate(
-          CurvedAnimation(parent: _animController, curve: Curves.easeInOut),
-        );
+      CurvedAnimation(parent: _animController, curve: Curves.easeInOut),
+    );
 
     _animController.forward();
 
+    // -------------------------------------------------------
+    // AFTER ANIMATION: CHECK IF USER IS LOGGED IN
+    // -------------------------------------------------------
     Timer(const Duration(seconds: 2), () async {
       if (!mounted) return;
 
-      // Populate user data from Firebase Auth
-      await ref.read(userProvider.notifier).fetchUserData();
-
-      if (!mounted) return;
-
+      // Load user data if logged in
       final user = FirebaseAuth.instance.currentUser;
+
       if (user != null) {
+        // Update the Riverpod userProvider with Firebase User
+         ref.read(userProvider.notifier).setUser(user);
+
+        if (!mounted) return;
         NavigationUtils.pushReplacementNamed(context, RouteNames.home);
       } else {
+        // Not logged in
+        if (!mounted) return;
         NavigationUtils.pushReplacementNamed(context, RouteNames.auth);
       }
     });
@@ -64,6 +75,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -89,8 +101,8 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                       'https://assets1.lottiefiles.com/packages/lf20_touohxv0.json',
                       controller: _animController,
                       onLoaded: (composition) {
+                        // Run your animation smoothly ONCE
                         _animController.duration = composition.duration;
-                        _animController.repeat();
                       },
                     ),
                   ),
@@ -98,8 +110,8 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                   Text(
                     'Your Loan Buddy. In Your Language.',
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      color: AppTheme.neutralWhite,
-                    ),
+                          color: AppTheme.neutralWhite,
+                        ),
                     textAlign: TextAlign.center,
                   ),
                 ],

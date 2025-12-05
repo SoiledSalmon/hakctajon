@@ -9,7 +9,7 @@ class UserNotifier extends StateNotifier<UserProfile?> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
-  /// Populates state from Firebase Auth on app start
+  /// Load user from FirebaseAuth on app start
   Future<void> fetchUserData() async {
     final user = _auth.currentUser;
     if (user != null) {
@@ -23,25 +23,23 @@ class UserNotifier extends StateNotifier<UserProfile?> {
     }
   }
 
-  /// Clears user state and signs out from Firebase and Google
+  /// Log out from Google + Firebase, clear provider
   Future<void> logout() async {
     try {
       await _googleSignIn.signOut();
       await _auth.signOut();
       state = null;
     } catch (e) {
-      // Handle error implicitly or log it
-      print('Error signing out: $e');
+      print("Logout Error: $e");
     }
   }
 
-  /// Updates profile picture from Google account (syncs current auth state)
-  Future<void> updateProfilePicture() async {
-    await _auth.currentUser?.reload();
-    await fetchUserData();
+  /// Optional helper to clear state if needed
+  void clearUser() {
+    state = null;
   }
 
-  /// Helper to set user directly (e.g. after fresh login)
+  /// Set user after fresh login
   void setUser(User user) {
     state = UserProfile(
       uid: user.uid,
@@ -50,6 +48,12 @@ class UserNotifier extends StateNotifier<UserProfile?> {
       profilePictureUrl: user.photoURL,
       createdAt: user.metadata.creationTime ?? DateTime.now(),
     );
+  }
+
+  /// Refresh profile picture
+  Future<void> updateProfilePicture() async {
+    await _auth.currentUser?.reload();
+    await fetchUserData();
   }
 }
 

@@ -18,9 +18,10 @@ import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  final firebaseApp = await Firebase.initializeApp(
+  await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   runApp(const ProviderScope(child: AILoanBuddyApp()));
 }
 
@@ -49,23 +50,16 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const SplashScreen());
       case RouteNames.auth:
         return MaterialPageRoute(builder: (_) => const AuthScreen());
-
       case RouteNames.home:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
       case RouteNames.chat:
         return MaterialPageRoute(builder: (_) => const AIChatScreen());
       case RouteNames.eligibility:
-        return MaterialPageRoute(
-          builder: (_) => const EligibilityCheckerScreen(),
-        );
+        return MaterialPageRoute(builder: (_) => const EligibilityCheckerScreen());
       case RouteNames.education:
-        return MaterialPageRoute(
-          builder: (_) => const FinancialEducationScreen(),
-        );
+        return MaterialPageRoute(builder: (_) => const FinancialEducationScreen());
       case RouteNames.checklist:
-        return MaterialPageRoute(
-          builder: (_) => const SmartDocumentChecklistScreen(),
-        );
+        return MaterialPageRoute(builder: (_) => const SmartDocumentChecklistScreen());
       case RouteNames.pdfPreview:
         return MaterialPageRoute(builder: (_) => const PDFPreviewScreen());
       case RouteNames.settings:

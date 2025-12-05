@@ -1,4 +1,5 @@
 import 'package:ai_loan_buddy/providers/settings_provider.dart';
+import 'package:ai_loan_buddy/providers/user_provider.dart';
 import 'package:ai_loan_buddy/theme/app_theme.dart';
 import 'package:ai_loan_buddy/utils/navigation.dart';
 
@@ -14,6 +15,7 @@ class ProfileScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(settingsProvider);
     final settingsNotifier = ref.read(settingsProvider.notifier);
+    final user = ref.watch(userProvider); // UserProfile model
 
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -28,9 +30,9 @@ class ProfileScreen extends ConsumerWidget {
         title: Text(
           'My Profile',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            color: Colors.white,
-            fontWeight: FontWeight.w700,
-          ),
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+              ),
         ),
       ),
       body: Container(
@@ -48,52 +50,69 @@ class ProfileScreen extends ConsumerWidget {
             child: Column(
               children: [
                 const SizedBox(height: 20),
-                // Avatar Section
+
+                // 🔥 GOOGLE PROFILE PICTURE
                 Container(
-                  width: 100,
-                  height: 100,
+                  width: 120,
+                  height: 120,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(color: Colors.white, width: 3),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
-                        blurRadius: 20,
-                        offset: const Offset(0, 10),
+                        color: Colors.black.withOpacity(0.25),
+                        blurRadius: 12,
+                        offset: const Offset(0, 6),
                       ),
                     ],
-                    gradient: const LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [AppTheme.accent1, AppTheme.accent2],
-                    ),
+                    image: user?.profilePictureUrl != null
+                        ? DecorationImage(
+                            image: NetworkImage(user!.profilePictureUrl!),
+                            fit: BoxFit.cover,
+                          )
+                        : null,
+                    gradient: user?.profilePictureUrl == null
+                        ? const LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [AppTheme.accent1, AppTheme.accent2],
+                          )
+                        : null,
                   ),
-                  child: Center(
-                    child: Text(
-                      'JD',
-                      style: Theme.of(context).textTheme.headlineMedium
-                          ?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 32,
+                  child: user?.profilePictureUrl == null
+                      ? Center(
+                          child: Text(
+                            (user?.name ?? "U")[0],
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium
+                                ?.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 36,
+                                ),
                           ),
-                    ),
-                  ),
+                        )
+                      : null,
                 ),
+
                 const SizedBox(height: 16),
+
+                // NAME
                 Text(
-                  'John Doe',
+                  user?.name ?? "User",
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                  ),
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
                 ),
+
                 const SizedBox(height: 8),
+
+                // Premium Badge
                 Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 6,
-                  ),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(20),
@@ -101,59 +120,45 @@ class ProfileScreen extends ConsumerWidget {
                   child: Text(
                     'Premium Member',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: AppTheme.accent1,
-                      fontWeight: FontWeight.w600,
-                    ),
+                          color: AppTheme.accent1,
+                          fontWeight: FontWeight.w600,
+                        ),
                   ),
                 ),
+
                 const SizedBox(height: 32),
 
-                // Profile Details Section
+                // Profile Details Card
                 GlassCard(
                   width: double.infinity,
                   padding: const EdgeInsets.all(24),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Personal Information',
-                            style: Theme.of(context).textTheme.titleMedium
-                                ?.copyWith(fontWeight: FontWeight.w700),
-                          ),
-                          TextButton(
-                            onPressed: () {}, // Dummy action
-                            style: TextButton.styleFrom(
-                              padding: EdgeInsets.zero,
-                              minimumSize: Size.zero,
-                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                            ),
-                            child: Text(
-                              'Edit',
-                              style: Theme.of(context).textTheme.bodyMedium
-                                  ?.copyWith(
-                                    color: AppTheme.accent1,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                            ),
-                          ),
-                        ],
+                      Text(
+                        'Personal Information',
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(fontWeight: FontWeight.w700),
                       ),
                       const Divider(height: 32, color: Colors.white24),
+
                       _buildProfileRow(
                         context,
                         Icons.email_outlined,
                         'Email',
-                        'john.doe@example.com',
+                        user?.email ?? 'Not available',
                       ),
+
                       const SizedBox(height: 20),
+
                       _buildProfileRow(
                         context,
-                        Icons.phone_outlined,
-                        'Phone',
-                        '+1 (555) 123-4567',
+                        Icons.calendar_today_outlined,
+                        'Member Since',
+                        user?.createdAt.toString().split(" ").first ??
+                            'Unknown',
                       ),
                     ],
                   ),
@@ -161,21 +166,20 @@ class ProfileScreen extends ConsumerWidget {
 
                 const SizedBox(height: 24),
 
-                // Settings Controls Section (Language & Theme)
+                // LANGUAGE + THEME
                 Row(
                   children: [
                     Expanded(
                       child: GlassCard(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 16,
-                        ),
+                            horizontal: 12, vertical: 16),
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                               'Language',
-                              style: Theme.of(context).textTheme.bodyMedium
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
                                   ?.copyWith(
                                     color: Colors.white70,
                                     fontWeight: FontWeight.w600,
@@ -196,17 +200,16 @@ class ProfileScreen extends ConsumerWidget {
                     Expanded(
                       child: GlassCard(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 16,
-                        ),
+                            horizontal: 12, vertical: 16),
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                               settings.themeMode == ThemeMode.light
                                   ? 'Light Mode'
                                   : 'Dark Mode',
-                              style: Theme.of(context).textTheme.bodyMedium
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
                                   ?.copyWith(
                                     color: Colors.white70,
                                     fontWeight: FontWeight.w600,
@@ -221,10 +224,6 @@ class ProfileScreen extends ConsumerWidget {
                               inactiveTrackColor: Colors.white12,
                               onChanged: (_) {
                                 settingsNotifier.toggleTheme();
-                                ref.read(appThemeProvider.notifier).state =
-                                    settings.themeMode == ThemeMode.light
-                                    ? ThemeMode.dark
-                                    : ThemeMode.light;
                               },
                             ),
                           ],
@@ -236,11 +235,13 @@ class ProfileScreen extends ConsumerWidget {
 
                 const SizedBox(height: 40),
 
-                // Logout Button
+                // LOGOUT BUTTON
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      await ref.read(userProvider.notifier).logout();
+
                       Navigator.of(context).pushNamedAndRemoveUntil(
                         RouteNames.auth,
                         (route) => false,
@@ -255,12 +256,13 @@ class ProfileScreen extends ConsumerWidget {
                     child: Text(
                       'Log Out',
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: AppTheme.warning,
-                        fontWeight: FontWeight.w600,
-                      ),
+                            color: AppTheme.warning,
+                            fontWeight: FontWeight.w600,
+                          ),
                     ),
                   ),
                 ),
+
                 const SizedBox(height: 20),
               ],
             ),
@@ -270,6 +272,7 @@ class ProfileScreen extends ConsumerWidget {
     );
   }
 
+  // Profile Row Widget
   Widget _buildProfileRow(
     BuildContext context,
     IconData icon,
@@ -286,15 +289,16 @@ class ProfileScreen extends ConsumerWidget {
             Text(
               label,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.white54,
-                fontSize: 12,
-              ),
+                    color: Colors.white54,
+                    fontSize: 12,
+                  ),
             ),
             Text(
               value,
-              style: Theme.of(
-                context,
-              ).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyLarge
+                  ?.copyWith(fontWeight: FontWeight.w500),
             ),
           ],
         ),
