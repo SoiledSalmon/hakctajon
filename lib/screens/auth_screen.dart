@@ -91,8 +91,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                       const SizedBox(height: 16),
                       Text(
                         'Your personal AI-powered financial advisor. Login to continue.',
-                        style: theme.textTheme.bodyLarge
-                            ?.copyWith(color: Colors.black87),
+                        style: theme.textTheme.bodyLarge,
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 48),
@@ -106,7 +105,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                                   padding: const EdgeInsets.symmetric(
                                     vertical: 16,
                                   ),
-                                  backgroundColor: Colors.white,
+                                  backgroundColor: AppTheme.neutralWhite,
                                   foregroundColor: Colors.black87,
                                   textStyle: const TextStyle(
                                     fontWeight: FontWeight.w600,

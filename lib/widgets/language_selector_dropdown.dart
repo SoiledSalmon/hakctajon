@@ -42,7 +42,7 @@ class _LanguageSelectorDropdownState extends State<LanguageSelectorDropdown> {
     return DropdownButton<String>(
       value: selectedLanguage,
       underline: const SizedBox.shrink(),
-      dropdownColor: Colors.white.withOpacity(0.9),
+      dropdownColor: Theme.of(context).canvasColor.withOpacity(0.9),
       items: languages
           .map((lang) => DropdownMenuItem(value: lang, child: Text(lang)))
           .toList(),

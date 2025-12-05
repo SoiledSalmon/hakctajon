@@ -98,7 +98,6 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Text(
               title,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: Colors.white,
                 fontWeight: FontWeight.w700,
                 letterSpacing: 0.5,
                 fontSize:

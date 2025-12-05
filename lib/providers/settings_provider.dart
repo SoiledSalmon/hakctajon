@@ -21,7 +21,7 @@ class SettingsState {
 
 class SettingsNotifier extends StateNotifier<SettingsState> {
   SettingsNotifier()
-    : super(SettingsState(languageCode: 'EN', themeMode: ThemeMode.light));
+    : super(SettingsState(languageCode: 'EN', themeMode: ThemeMode.dark));
 
   void setLanguage(String code) {
     state = state.copyWith(languageCode: code.toUpperCase());

@@ -1,6 +1,5 @@
 import 'package:ai_loan_buddy/providers/chat_provider.dart';
 import 'package:ai_loan_buddy/providers/settings_provider.dart';
-import 'package:ai_loan_buddy/theme/app_theme.dart';
 import 'package:ai_loan_buddy/widgets/app_button.dart';
 import 'package:ai_loan_buddy/widgets/language_selector_dropdown.dart';
 import 'package:flutter/material.dart';
@@ -43,11 +42,6 @@ class SettingsScreen extends ConsumerWidget {
                 value: settings.themeMode == ThemeMode.dark,
                 onChanged: (_) {
                   settingsNotifier.toggleTheme();
-                  ref
-                      .read(appThemeProvider.notifier)
-                      .state = settings.themeMode == ThemeMode.light
-                      ? ThemeMode.dark
-                      : ThemeMode.light;
                 },
               ),
               const SizedBox(height: 24),

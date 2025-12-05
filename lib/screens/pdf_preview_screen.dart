@@ -37,7 +37,7 @@ class PDFPreviewScreen extends StatelessWidget {
               width: double.infinity,
               constraints: const BoxConstraints(maxWidth: 600),
               decoration: BoxDecoration(
-                color: AppTheme.neutralWhite,
+                color: Theme.of(context).cardColor,
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(

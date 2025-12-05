@@ -10,6 +10,7 @@ import 'package:ai_loan_buddy/screens/settings_screen.dart';
 import 'package:ai_loan_buddy/screens/splash_screen.dart';
 import 'package:ai_loan_buddy/theme/app_theme.dart';
 import 'package:ai_loan_buddy/utils/navigation.dart';
+import 'package:ai_loan_buddy/providers/settings_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -30,7 +31,7 @@ class AILoanBuddyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final themeMode = ref.watch(appThemeProvider);
+    final themeMode = ref.watch(settingsProvider.select((s) => s.themeMode));
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'AI Loan Buddy',

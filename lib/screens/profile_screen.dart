@@ -24,24 +24,27 @@ class ProfileScreen extends ConsumerWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_rounded, color: Colors.white),
+          icon: Icon(Icons.arrow_back_ios_rounded,
+              color: Theme.of(context).iconTheme.color),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
           'My Profile',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: Colors.white,
                 fontWeight: FontWeight.w700,
               ),
         ),
       ),
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [AppTheme.primary1, AppTheme.backgroundBase],
-            stops: [0.0, 0.4],
+            colors: [
+              Theme.of(context).colorScheme.primary.withOpacity(0.8),
+              Theme.of(context).scaffoldBackgroundColor
+            ],
+            stops: const [0.0, 0.4],
           ),
         ),
         child: SafeArea(
@@ -57,7 +60,8 @@ class ProfileScreen extends ConsumerWidget {
                   height: 120,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    border: Border.all(color: Colors.white, width: 3),
+                    border: Border.all(
+                        color: Theme.of(context).dividerColor, width: 3),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.25),
@@ -102,7 +106,6 @@ class ProfileScreen extends ConsumerWidget {
                 Text(
                   user?.name ?? "User",
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        color: Colors.white,
                         fontWeight: FontWeight.w600,
                       ),
                 ),
@@ -114,7 +117,7 @@ class ProfileScreen extends ConsumerWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
+                    color: Theme.of(context).cardColor.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
@@ -142,7 +145,7 @@ class ProfileScreen extends ConsumerWidget {
                             .titleMedium
                             ?.copyWith(fontWeight: FontWeight.w700),
                       ),
-                      const Divider(height: 32, color: Colors.white24),
+                      const Divider(height: 32),
 
                       _buildProfileRow(
                         context,
@@ -181,7 +184,6 @@ class ProfileScreen extends ConsumerWidget {
                                   .textTheme
                                   .bodyMedium
                                   ?.copyWith(
-                                    color: Colors.white70,
                                     fontWeight: FontWeight.w600,
                                   ),
                             ),
@@ -211,17 +213,14 @@ class ProfileScreen extends ConsumerWidget {
                                   .textTheme
                                   .bodyMedium
                                   ?.copyWith(
-                                    color: Colors.white70,
                                     fontWeight: FontWeight.w600,
                                   ),
                             ),
                             const SizedBox(height: 8),
                             Switch(
                               value: settings.themeMode == ThemeMode.dark,
-                              activeThumbColor: AppTheme.accent1,
-                              activeTrackColor: Colors.white24,
-                              inactiveThumbColor: Colors.white,
-                              inactiveTrackColor: Colors.white12,
+                              activeTrackColor: AppTheme.accent1,
+                              activeThumbColor: Colors.white,
                               onChanged: (_) {
                                 settingsNotifier.toggleTheme();
                               },
@@ -242,13 +241,16 @@ class ProfileScreen extends ConsumerWidget {
                     onPressed: () async {
                       await ref.read(userProvider.notifier).logout();
 
+                      if (!context.mounted) return;
+
                       Navigator.of(context).pushNamedAndRemoveUntil(
                         RouteNames.auth,
                         (route) => false,
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white.withOpacity(0.1),
+                      backgroundColor:
+                          Theme.of(context).cardColor.withOpacity(0.1),
                       side: BorderSide(
                         color: AppTheme.warning.withOpacity(0.5),
                       ),
@@ -281,7 +283,7 @@ class ProfileScreen extends ConsumerWidget {
   ) {
     return Row(
       children: [
-        Icon(icon, color: Colors.white70, size: 20),
+        Icon(icon, color: Theme.of(context).iconTheme.color, size: 20),
         const SizedBox(width: 16),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -289,7 +291,9 @@ class ProfileScreen extends ConsumerWidget {
             Text(
               label,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.white54,
+                    color:
+                        Theme.of(context).textTheme.bodySmall?.color ??
+                            Colors.grey,
                     fontSize: 12,
                   ),
             ),

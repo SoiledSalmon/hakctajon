@@ -20,8 +20,12 @@ class ProfileBubbleButton extends StatelessWidget {
       borderRadius: BorderRadius.circular(40),
       child: CircleAvatar(
         radius: 22,
-        backgroundColor: Colors.grey.shade300,
-        child: const Icon(Icons.person, color: Colors.black54, size: 28),
+        backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
+        child: Icon(
+          Icons.person,
+          color: Theme.of(context).colorScheme.onSurfaceVariant,
+          size: 28,
+        ),
       ),
     );
   }
