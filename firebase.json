@@ -1,1 +1,35 @@
-{"flutter":{"platforms":{"dart":{"lib/firebase_options.dart":{"projectId":"ai-for-loans","configurations":{"android":"1:304711399498:android:d2a4c1be7bd4ce57ffceb3","ios":"1:304711399498:ios:6ba7b72b9f26bc97ffceb3","macos":"1:304711399498:ios:6ba7b72b9f26bc97ffceb3","web":"1:304711399498:web:3c59511c5bbb4d1effceb3","windows":"1:304711399498:web:82304e535d734a1effceb3"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "ai-for-loans",
+          "configurations": {
+            "android": "1:304711399498:android:d2a4c1be7bd4ce57ffceb3",
+            "ios": "1:304711399498:ios:6ba7b72b9f26bc97ffceb3",
+            "macos": "1:304711399498:ios:6ba7b72b9f26bc97ffceb3",
+            "web": "1:304711399498:web:3c59511c5bbb4d1effceb3",
+            "windows": "1:304711399498:web:82304e535d734a1effceb3"
+          }
+        }
+      }
+    }
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "disallowLegacyRuntimeConfig": true,
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ],
+      "predeploy": [
+        "npm --prefix \"$RESOURCE_DIR\" run lint"
+      ]
+    }
+  ]
+}
