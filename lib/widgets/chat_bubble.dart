@@ -20,16 +20,16 @@ class ChatBubble extends StatelessWidget {
 
     final bgColor = isUser
         ? AppTheme.primary1
-        : AppTheme.accent2.withOpacity(0.15);
+        : AppTheme.accent2.withOpacity(0.1);
     final textColor = isUser ? AppTheme.neutralWhite : AppTheme.backgroundBase;
 
     return Align(
       alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
         constraints: BoxConstraints(
-          maxWidth: MediaQuery.of(context).size.width * 0.7,
+          maxWidth: MediaQuery.of(context).size.width * 0.75,
         ),
-        margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+        margin: const EdgeInsets.symmetric(vertical: 4),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
           color: bgColor,
@@ -37,9 +37,9 @@ class ChatBubble extends StatelessWidget {
           boxShadow: [
             if (isUser)
               BoxShadow(
-                color: AppTheme.primary1.withOpacity(0.5),
+                color: AppTheme.primary1.withOpacity(0.3),
                 blurRadius: 8,
-                offset: const Offset(0, 3),
+                offset: const Offset(0, 4),
               ),
           ],
         ),
@@ -49,6 +49,7 @@ class ChatBubble extends StatelessWidget {
             fontWeight: FontWeight.w500,
             fontSize: 15,
             color: textColor,
+            height: 1.4,
           ),
         ),
       ),
